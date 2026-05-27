@@ -10,8 +10,8 @@ namespace Lambdy
             Expression<Func<TModel, TSelectModel>> expression)
             where TModel : class
         {
-            ArgumentNullException.ThrowIfNull(lambdyBuilder);
-            ArgumentNullException.ThrowIfNull(expression);
+            if (lambdyBuilder is null) throw new ArgumentNullException(nameof(lambdyBuilder));
+            if (expression is null) throw new ArgumentNullException(nameof(expression));
             
             lambdyBuilder
                 .ExpressionBuilder
@@ -24,8 +24,8 @@ namespace Lambdy
             Expression<Func<TModel, bool>> expression) 
             where TModel : class
         {
-            ArgumentNullException.ThrowIfNull(lambdyBuilder);
-            ArgumentNullException.ThrowIfNull(expression);
+            if (lambdyBuilder is null) throw new ArgumentNullException(nameof(lambdyBuilder));
+            if (expression is null) throw new ArgumentNullException(nameof(expression));
             
             lambdyBuilder
                 .ExpressionBuilder
@@ -38,8 +38,8 @@ namespace Lambdy
             Expression<Func<TModel, TKey>> expression)
             where TModel : class
         {
-            ArgumentNullException.ThrowIfNull(lambdyBuilder);
-            ArgumentNullException.ThrowIfNull(expression);
+            if (lambdyBuilder is null) throw new ArgumentNullException(nameof(lambdyBuilder));
+            if (expression is null) throw new ArgumentNullException(nameof(expression));
             
             lambdyBuilder
                 .ExpressionBuilder
@@ -52,8 +52,8 @@ namespace Lambdy
             Expression<Func<TModel, TKey>> expression)
             where TModel : class
         {
-            ArgumentNullException.ThrowIfNull(lambdyBuilder);
-            ArgumentNullException.ThrowIfNull(expression);
+            if (lambdyBuilder is null) throw new ArgumentNullException(nameof(lambdyBuilder));
+            if (expression is null) throw new ArgumentNullException(nameof(expression));
             
             lambdyBuilder
                 .ExpressionBuilder
@@ -66,8 +66,8 @@ namespace Lambdy
             Expression<Func<TModel, TKey>> expression)
             where TModel : class
         {
-            ArgumentNullException.ThrowIfNull(lambdyBuilder);
-            ArgumentNullException.ThrowIfNull(expression);
+            if (lambdyBuilder is null) throw new ArgumentNullException(nameof(lambdyBuilder));
+            if (expression is null) throw new ArgumentNullException(nameof(expression));
             
             lambdyBuilder
                 .ExpressionBuilder
@@ -80,8 +80,8 @@ namespace Lambdy
             Expression<Func<TModel, TKey>> expression)
             where TModel : class
         {
-            ArgumentNullException.ThrowIfNull(lambdyBuilder);
-            ArgumentNullException.ThrowIfNull(expression);
+            if (lambdyBuilder is null) throw new ArgumentNullException(nameof(lambdyBuilder));
+            if (expression is null) throw new ArgumentNullException(nameof(expression));
             
             lambdyBuilder
                 .ExpressionBuilder

@@ -28,7 +28,7 @@ namespace Lambdy.Builders.SubBuilders.Raw
 
         public ILambdyBuilder<TModel> From(string sqlFragment)
         {
-            ArgumentNullException.ThrowIfNull(sqlFragment);
+            if (sqlFragment is null) throw new ArgumentNullException(nameof(sqlFragment));
             
             sqlFragment = SubstringSqlClause(sqlFragment, SqlClauses.From);
 
@@ -41,7 +41,7 @@ namespace Lambdy.Builders.SubBuilders.Raw
 
         public ILambdyBuilder<TModel> Join(string sqlFragment)
         {
-            ArgumentNullException.ThrowIfNull(sqlFragment);
+            if (sqlFragment is null) throw new ArgumentNullException(nameof(sqlFragment));
             
             _clauseReferences
                 .JoinClause
@@ -53,7 +53,7 @@ namespace Lambdy.Builders.SubBuilders.Raw
 
         public ILambdyBuilder<TModel> Where(string sqlFragment)
         {
-            ArgumentNullException.ThrowIfNull(sqlFragment);
+            if (sqlFragment is null) throw new ArgumentNullException(nameof(sqlFragment));
             
             _clauseReferences
                 .WhereClause
@@ -67,8 +67,8 @@ namespace Lambdy.Builders.SubBuilders.Raw
             string sqlFragment,
             object parameters)
         {
-            ArgumentNullException.ThrowIfNull(sqlFragment);
-            ArgumentNullException.ThrowIfNull(parameters);
+            if (sqlFragment is null) throw new ArgumentNullException(nameof(sqlFragment));
+            if (parameters is null) throw new ArgumentNullException(nameof(parameters));
             
             Where(sqlFragment);
             AppendParametersFromObject(parameters);
@@ -78,7 +78,7 @@ namespace Lambdy.Builders.SubBuilders.Raw
 
         public ILambdyBuilder<TModel> OrderBy(string sqlFragment)
         {
-            ArgumentNullException.ThrowIfNull(sqlFragment);
+            if (sqlFragment is null) throw new ArgumentNullException(nameof(sqlFragment));
             
             sqlFragment = SubstringSqlClause(sqlFragment, SqlClauses.OrderBy);
 
@@ -99,8 +99,8 @@ namespace Lambdy.Builders.SubBuilders.Raw
             string sqlFragment,
             object parameters)
         {
-            ArgumentNullException.ThrowIfNull(sqlFragment);
-            ArgumentNullException.ThrowIfNull(parameters);
+            if (sqlFragment is null) throw new ArgumentNullException(nameof(sqlFragment));
+            if (parameters is null) throw new ArgumentNullException(nameof(parameters));
             
             OrderBy(sqlFragment);
             AppendParametersFromObject(parameters);
@@ -110,8 +110,8 @@ namespace Lambdy.Builders.SubBuilders.Raw
 
         private string SubstringSqlClause(string sqlFragment, string clause)
         {
-            ArgumentNullException.ThrowIfNull(sqlFragment);
-            ArgumentNullException.ThrowIfNull(clause);
+            if (sqlFragment is null) throw new ArgumentNullException(nameof(sqlFragment));
+            if (clause is null) throw new ArgumentNullException(nameof(clause));
             
             var index = sqlFragment.IndexOf(
                 clause,
@@ -128,7 +128,7 @@ namespace Lambdy.Builders.SubBuilders.Raw
 
         private void AppendParametersFromObject(object parameters)
         {
-            ArgumentNullException.ThrowIfNull(parameters);
+            if (parameters is null) throw new ArgumentNullException(nameof(parameters));
 
             foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(parameters))
             {

@@ -10,7 +10,7 @@ namespace Lambdy
         
         public static ILambdyBuilder<TModel> ByModel<TModel>(TModel model) where TModel : class
         {
-            ArgumentNullException.ThrowIfNull(model);
+            if (model is null) throw new ArgumentNullException(nameof(model));
             return ByModel<TModel>();
         }
         
