@@ -24,10 +24,10 @@ namespace Lambdy.Compilers.Query
                 queryCompilerInput.RemoveEmptyTokens);
 
             clauseSectionSqlVisitor.SetTemplate(queryCompilerInput.SqlTemplate!);
-            expressionNodeSqlVisitor.SetParameterTracker(queryCompilerInput.ParameterTracker);
+            expressionNodeSqlVisitor.SetParameterTracker(queryCompilerInput.ParameterTracker!);
 
             // ReSharper disable once ForCanBeConvertedToForeach (reason - performance)
-            for (var i = 0; i < queryCompilerInput.ClauseNodes.Length; i++)
+            for (var i = 0; i < queryCompilerInput.ClauseNodes!.Length; i++)
             {
                 queryCompilerInput
                     .ClauseNodes[i]
@@ -37,7 +37,7 @@ namespace Lambdy.Compilers.Query
             return new LambdyResult
             {
                 Sql = clauseSectionSqlVisitor.Sql,
-                Parameters = expressionNodeSqlVisitor.ParameterTracker.Parameters
+                Parameters = expressionNodeSqlVisitor.ParameterTracker!.Parameters
             };
         }
     }
