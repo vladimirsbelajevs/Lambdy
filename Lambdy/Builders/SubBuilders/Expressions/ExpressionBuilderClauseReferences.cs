@@ -4,11 +4,11 @@ namespace Lambdy.Builders.SubBuilders.Expressions
 {
     internal class ExpressionBuilderClauseReferences
     {
-        public SelectClauseNode? SelectClause { get; set; }
-        public FromClauseNode? FromClause { get; set; }
-        public JoinClauseNode? JoinClause { get; set; }
-        public WhereClauseNode? WhereClause { get; set; }
-        public OrderClauseNode? OrderClause { get; set; }
-        public SkipTakeClauseNode? SkipTakeClause  { get; set; }
+        public SelectClauseNode SelectClause { get; set; } = new SelectClauseNode();
+        public FromClauseNode FromClause { get; set; } = new FromClauseNode();
+        public JoinClauseNode JoinClause { get; set; } = new JoinClauseNode();
+        public WhereClauseNode WhereClause { get; set; } = new WhereClauseNode();
+        public OrderClauseNode OrderClause { get; set; } = new OrderClauseNode();
+        public SkipTakeClauseNode SkipTakeClause  { get; set; } = new SkipTakeClauseNode();
     }
 }

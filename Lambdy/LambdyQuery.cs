@@ -1,4 +1,5 @@
-﻿using Lambdy.Builders;
+﻿using System;
+using Lambdy.Builders;
 using Lambdy.Compilers.Query;
 using Lambdy.Compilers.Query.Abstract;
 
