@@ -18,7 +18,7 @@ namespace Lambdy.Visitors.ExpressionNodeSql
             _stringBuilder = stringBuilder;
         }
         
-        public ParameterTracker ParameterTracker { get; private set; }
+        public ParameterTracker? ParameterTracker { get; private set; }
 
         public void SetParameterTracker(ParameterTracker parameterTracker)
         {

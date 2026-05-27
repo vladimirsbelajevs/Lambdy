@@ -11,9 +11,9 @@ namespace Lambdy.Compilers.Query
     {
         public override LambdyResult Compile(QueryCompilerInput queryCompilerInput)
         {
-            ArgumentNullException.ThrowIfNull(queryCompilerInput);
-            ArgumentNullException.ThrowIfNull(queryCompilerInput.ParameterTracker);
-            ArgumentNullException.ThrowIfNull(queryCompilerInput.ClauseNodes);
+            if (queryCompilerInput is null) throw new ArgumentNullException(nameof(queryCompilerInput));
+            if (queryCompilerInput.ParameterTracker is null) throw new ArgumentNullException(nameof(queryCompilerInput.ParameterTracker));
+            if (queryCompilerInput.ClauseNodes is null) throw new ArgumentNullException(nameof(queryCompilerInput.ClauseNodes));
 
             var stringBuilder = new StringBuilder();
             var expressionNodeSqlVisitor = new RecursiveNodeSqlVisitor(stringBuilder);
@@ -23,7 +23,7 @@ namespace Lambdy.Compilers.Query
                 queryCompilerInput.SqlDialect,
                 queryCompilerInput.RemoveEmptyTokens);
 
-            clauseSectionSqlVisitor.SetTemplate(queryCompilerInput.SqlTemplate);
+            clauseSectionSqlVisitor.SetTemplate(queryCompilerInput.SqlTemplate!);
             expressionNodeSqlVisitor.SetParameterTracker(queryCompilerInput.ParameterTracker);
 
             // ReSharper disable once ForCanBeConvertedToForeach (reason - performance)

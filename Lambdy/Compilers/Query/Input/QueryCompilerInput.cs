@@ -1,4 +1,5 @@
-﻿using Lambdy.Parameters;
+﻿using System;
+using Lambdy.Parameters;
 using Lambdy.TreeNodes.ClauseSectionNodes.Abstract;
 
 namespace Lambdy.Compilers.Query.Input
@@ -9,9 +10,9 @@ namespace Lambdy.Compilers.Query.Input
         
         public string? SqlTemplate { get; set; }
 
-        public ParameterTracker ParameterTracker { get; set; } = new ParameterTracker();
+        public ParameterTracker? ParameterTracker { get; set; } = new ParameterTracker();
         
-        public ClauseSectionNode[] ClauseNodes { get; set; } = Array.Empty<ClauseSectionNode>();
+        public ClauseSectionNode[]? ClauseNodes { get; set; } = Array.Empty<ClauseSectionNode>();
         
         public bool RemoveEmptyTokens { get; set; } = true;
         
