@@ -11,9 +11,9 @@ using Lambdy.TreeNodes.ClauseSectionNodes.Abstract;
 namespace Lambdy.Builders
 {
     internal sealed class LambdyBuilder<TModel> : ILambdyBuilder<TModel> 
-        where TModel: class
+        where TModel : class
     {
-        private string _customTemplate;
+        private string? _customTemplate;
         
         private readonly QueryCompiler _queryCompiler;
         
@@ -35,7 +35,7 @@ namespace Lambdy.Builders
 
         internal LambdyBuilder(QueryCompiler queryCompiler)
         {
-            _queryCompiler = queryCompiler;
+            _queryCompiler = queryCompiler ?? throw new ArgumentNullException(nameof(queryCompiler));
             _clauseSectionNodes[0] = _selectClause;
             _clauseSectionNodes[1] = _fromClause;
             _clauseSectionNodes[2] = _joinClause;
@@ -67,7 +67,7 @@ namespace Lambdy.Builders
                 });
         }
 
-        public ILambdyBuilder<TModel> WithTemplate(string sqlTemplate)
+        public ILambdyBuilder<TModel> WithTemplate(string? sqlTemplate)
         {
             _customTemplate = sqlTemplate;
             return this;
@@ -103,7 +103,7 @@ namespace Lambdy.Builders
             });
         }
         
-        public LambdyResult Compile(LambdyCompilerOptions options)
+        public LambdyResult Compile(LambdyCompilerOptions? options = null)
         {
             return _queryCompiler.Compile(new QueryCompilerInput()
             {
@@ -111,7 +111,7 @@ namespace Lambdy.Builders
                 SqlTemplate = _customTemplate,
                 ParameterTracker = _parameterTracker,
                 ClauseNodes = _clauseSectionNodes,
-                RemoveEmptyTokens = options.RemoveEmptyTokens
+                RemoveEmptyTokens = options?.RemoveEmptyTokens ?? true
             });
         }
         

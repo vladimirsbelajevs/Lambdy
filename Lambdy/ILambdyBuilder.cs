@@ -3,7 +3,7 @@
 namespace Lambdy
 {
     public interface ILambdyBuilder<out TModel> : ILambdyBuilderCore
-        where TModel: class
+        where TModel : class
     {
         IRawBuilder<TModel> Raw { get; }
 

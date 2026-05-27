@@ -1,4 +1,6 @@
-﻿namespace Lambdy
+﻿using System;
+
+namespace Lambdy
 {
     public static class LambdyBuilderCoreExtensions
     {
@@ -6,6 +8,7 @@
             this ILambdyBuilderCore lambdyBuilder)
             where TTarget : class
         {
+            ArgumentNullException.ThrowIfNull(lambdyBuilder);
             return (ILambdyBuilder<TTarget>) lambdyBuilder;
         }
     }

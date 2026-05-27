@@ -8,8 +8,11 @@ namespace Lambdy
         public static ILambdyBuilder<TModel> Select<TModel, TSelectModel>(
             this ILambdyBuilder<TModel> lambdyBuilder,
             Expression<Func<TModel, TSelectModel>> expression)
-            where TModel: class
+            where TModel : class
         {
+            ArgumentNullException.ThrowIfNull(lambdyBuilder);
+            ArgumentNullException.ThrowIfNull(expression);
+            
             lambdyBuilder
                 .ExpressionBuilder
                 .AddSelectExpression(expression.Body);
@@ -19,8 +22,11 @@ namespace Lambdy
         public static ILambdyBuilder<TModel> Where<TModel>(
             this ILambdyBuilder<TModel> lambdyBuilder,
             Expression<Func<TModel, bool>> expression) 
-            where TModel: class
+            where TModel : class
         {
+            ArgumentNullException.ThrowIfNull(lambdyBuilder);
+            ArgumentNullException.ThrowIfNull(expression);
+            
             lambdyBuilder
                 .ExpressionBuilder
                 .AddWhereExpression(expression.Body);
@@ -32,6 +38,9 @@ namespace Lambdy
             Expression<Func<TModel, TKey>> expression)
             where TModel : class
         {
+            ArgumentNullException.ThrowIfNull(lambdyBuilder);
+            ArgumentNullException.ThrowIfNull(expression);
+            
             lambdyBuilder
                 .ExpressionBuilder
                 .AddOrderByExpression(expression.Body);
@@ -43,6 +52,9 @@ namespace Lambdy
             Expression<Func<TModel, TKey>> expression)
             where TModel : class
         {
+            ArgumentNullException.ThrowIfNull(lambdyBuilder);
+            ArgumentNullException.ThrowIfNull(expression);
+            
             lambdyBuilder
                 .ExpressionBuilder
                 .AddThenByExpression(expression.Body);
@@ -54,6 +66,9 @@ namespace Lambdy
             Expression<Func<TModel, TKey>> expression)
             where TModel : class
         {
+            ArgumentNullException.ThrowIfNull(lambdyBuilder);
+            ArgumentNullException.ThrowIfNull(expression);
+            
             lambdyBuilder
                 .ExpressionBuilder
                 .AddOrderByDescExpression(expression.Body);
@@ -65,6 +80,9 @@ namespace Lambdy
             Expression<Func<TModel, TKey>> expression)
             where TModel : class
         {
+            ArgumentNullException.ThrowIfNull(lambdyBuilder);
+            ArgumentNullException.ThrowIfNull(expression);
+            
             lambdyBuilder
                 .ExpressionBuilder
                 .AddThenByDescExpression(expression.Body);

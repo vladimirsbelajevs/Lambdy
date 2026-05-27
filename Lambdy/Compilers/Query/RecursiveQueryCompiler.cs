@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using Lambdy.Compilers.Query.Abstract;
 using Lambdy.Compilers.Query.Input;
 using Lambdy.Visitors.ClauseSectionSql;
@@ -10,6 +11,10 @@ namespace Lambdy.Compilers.Query
     {
         public override LambdyResult Compile(QueryCompilerInput queryCompilerInput)
         {
+            ArgumentNullException.ThrowIfNull(queryCompilerInput);
+            ArgumentNullException.ThrowIfNull(queryCompilerInput.ParameterTracker);
+            ArgumentNullException.ThrowIfNull(queryCompilerInput.ClauseNodes);
+
             var stringBuilder = new StringBuilder();
             var expressionNodeSqlVisitor = new RecursiveNodeSqlVisitor(stringBuilder);
             var clauseSectionSqlVisitor = new RecursiveClauseSectionSqlVisitor(

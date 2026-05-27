@@ -10,7 +10,7 @@ using Lambdy.TreeNodes.ExpressionNodes;
 namespace Lambdy.Builders.SubBuilders.Raw
 {
     internal class RawBuilder<TModel> : IRawBuilder<TModel>
-        where TModel: class
+        where TModel : class
     {
         private readonly ILambdyBuilder<TModel> _parentBuilder;
         private readonly ParameterTracker _parentParameterTracker;
@@ -21,13 +21,15 @@ namespace Lambdy.Builders.SubBuilders.Raw
             ParameterTracker parameterTracker,
             RawBuilderClauseReferences references)
         {
-            _parentBuilder = parentBuilder;
-            _parentParameterTracker = parameterTracker;
-            _clauseReferences = references;
+            _parentBuilder = parentBuilder ?? throw new ArgumentNullException(nameof(parentBuilder));
+            _parentParameterTracker = parameterTracker ?? throw new ArgumentNullException(nameof(parameterTracker));
+            _clauseReferences = references ?? throw new ArgumentNullException(nameof(references));
         }
 
         public ILambdyBuilder<TModel> From(string sqlFragment)
         {
+            ArgumentNullException.ThrowIfNull(sqlFragment);
+            
             sqlFragment = SubstringSqlClause(sqlFragment, SqlClauses.From);
 
             _clauseReferences
@@ -39,6 +41,8 @@ namespace Lambdy.Builders.SubBuilders.Raw
 
         public ILambdyBuilder<TModel> Join(string sqlFragment)
         {
+            ArgumentNullException.ThrowIfNull(sqlFragment);
+            
             _clauseReferences
                 .JoinClause
                 .Nodes
@@ -47,9 +51,10 @@ namespace Lambdy.Builders.SubBuilders.Raw
             return _parentBuilder;
         }
 
-        public ILambdyBuilder<TModel> Where(
-            string sqlFragment)
+        public ILambdyBuilder<TModel> Where(string sqlFragment)
         {
+            ArgumentNullException.ThrowIfNull(sqlFragment);
+            
             _clauseReferences
                 .WhereClause
                 .Nodes
@@ -62,15 +67,19 @@ namespace Lambdy.Builders.SubBuilders.Raw
             string sqlFragment,
             object parameters)
         {
+            ArgumentNullException.ThrowIfNull(sqlFragment);
+            ArgumentNullException.ThrowIfNull(parameters);
+            
             Where(sqlFragment);
             AppendParametersFromObject(parameters);
 
             return _parentBuilder;
         }
 
-        public ILambdyBuilder<TModel> OrderBy(
-            string sqlFragment)
+        public ILambdyBuilder<TModel> OrderBy(string sqlFragment)
         {
+            ArgumentNullException.ThrowIfNull(sqlFragment);
+            
             sqlFragment = SubstringSqlClause(sqlFragment, SqlClauses.OrderBy);
 
             _clauseReferences
@@ -90,6 +99,9 @@ namespace Lambdy.Builders.SubBuilders.Raw
             string sqlFragment,
             object parameters)
         {
+            ArgumentNullException.ThrowIfNull(sqlFragment);
+            ArgumentNullException.ThrowIfNull(parameters);
+            
             OrderBy(sqlFragment);
             AppendParametersFromObject(parameters);
 
@@ -98,6 +110,9 @@ namespace Lambdy.Builders.SubBuilders.Raw
 
         private string SubstringSqlClause(string sqlFragment, string clause)
         {
+            ArgumentNullException.ThrowIfNull(sqlFragment);
+            ArgumentNullException.ThrowIfNull(clause);
+            
             var index = sqlFragment.IndexOf(
                 clause,
                 StringComparison.InvariantCultureIgnoreCase);
@@ -113,16 +128,16 @@ namespace Lambdy.Builders.SubBuilders.Raw
 
         private void AppendParametersFromObject(object parameters)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException($"{nameof(parameters)} cannot be null!");
-            }
+            ArgumentNullException.ThrowIfNull(parameters);
 
             foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(parameters))
             {
                 var value = property.GetValue(parameters);
-                _parentParameterTracker
-                    .AddParameter(property.Name, value);
+                if (value != null)
+                {
+                    _parentParameterTracker
+                        .AddParameter(property.Name, value);
+                }
             }
         }
     }

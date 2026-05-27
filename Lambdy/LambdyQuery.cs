@@ -8,12 +8,13 @@ namespace Lambdy
     {
         private static readonly QueryCompiler QueryCompiler = new RecursiveQueryCompiler();
         
-        public static ILambdyBuilder<TModel> ByModel<TModel>(TModel model) where TModel: class
+        public static ILambdyBuilder<TModel> ByModel<TModel>(TModel model) where TModel : class
         {
+            ArgumentNullException.ThrowIfNull(model);
             return ByModel<TModel>();
         }
         
-        public static ILambdyBuilder<TModel> ByModel<TModel>() where TModel: class
+        public static ILambdyBuilder<TModel> ByModel<TModel>() where TModel : class
         {
             return new LambdyBuilder<TModel>(QueryCompiler);
         }

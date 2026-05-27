@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
         <PackageId>Lambdy</PackageId>
         <Authors>Vladimir Belyayev</Authors>
         <PackageDescription>Library for building SQL from Lambda expressions, for use in conjunction with Micro-ORMs</PackageDescription>

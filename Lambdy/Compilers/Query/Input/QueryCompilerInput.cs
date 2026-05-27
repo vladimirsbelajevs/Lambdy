@@ -7,13 +7,13 @@ namespace Lambdy.Compilers.Query.Input
     {
         public LambdySqlDialect SqlDialect { get; set; }
         
-        public string SqlTemplate { get; set; }
+        public string? SqlTemplate { get; set; }
 
-        public ParameterTracker ParameterTracker { get; set; }
+        public ParameterTracker ParameterTracker { get; set; } = new ParameterTracker();
         
-        public ClauseSectionNode[] ClauseNodes { get; set; }
+        public ClauseSectionNode[] ClauseNodes { get; set; } = Array.Empty<ClauseSectionNode>();
         
-        public bool RemoveEmptyTokens { get; set; }
+        public bool RemoveEmptyTokens { get; set; } = true;
         
     }
 }
