@@ -9,12 +9,15 @@ namespace Lambdy.Parameters
 
         private int _paramIndex;
 
-        private static string _paramPrefix = "@";
+        private const string _paramPrefix = "@";
 
         public void AddParameter(
             string key,
             object value)
         {
+            ArgumentNullException.ThrowIfNull(key);
+            ArgumentNullException.ThrowIfNull(value);
+
             if (key.IndexOf(_paramPrefix, StringComparison.Ordinal) < 0)
             {
                 key = $"{_paramPrefix}{key}";
@@ -25,6 +28,8 @@ namespace Lambdy.Parameters
         
         public string AddParameter(object value)
         {
+            ArgumentNullException.ThrowIfNull(value);
+            
             var param = GetNextParameterName();
             Parameters.Add(param, value);
             return param;

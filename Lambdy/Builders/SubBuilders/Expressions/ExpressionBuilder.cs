@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Lambdy.Builders.SubBuilders.Expressions.Interfaces;
 using Lambdy.Resolvers;
 using Lambdy.TreeNodes.ClauseSectionNodes;
@@ -13,23 +14,29 @@ namespace Lambdy.Builders.SubBuilders.Expressions
         public ExpressionBuilder(
             ExpressionBuilderClauseReferences clauseReferences)
         {
-            _clauseReferences = clauseReferences;
+            _clauseReferences = clauseReferences ?? throw new ArgumentNullException(nameof(clauseReferences));
         }
         
         public void AddSelectExpression(System.Linq.Expressions.Expression exprBody)
         {
+            ArgumentNullException.ThrowIfNull(exprBody);
+            
             _clauseReferences.SelectClause.Node = ExpressionResolverMediator
                 .ResolveExpression(exprBody);
         }
         
         public void AddWhereExpression(System.Linq.Expressions.Expression exprBody)
         {
+            ArgumentNullException.ThrowIfNull(exprBody);
+            
             _clauseReferences.WhereClause.Nodes
                 .Add(ExpressionResolverMediator.ResolveExpression(exprBody));
         }
 
         public void AddOrderByExpression(System.Linq.Expressions.Expression exprBody)
         {
+            ArgumentNullException.ThrowIfNull(exprBody);
+            
             _clauseReferences.OrderClause.Nodes = new List<OrderClauseEntryNode>()
             {
                 new OrderClauseEntryNode()
@@ -42,6 +49,8 @@ namespace Lambdy.Builders.SubBuilders.Expressions
         
         public void AddThenByExpression(System.Linq.Expressions.Expression exprBody)
         {
+            ArgumentNullException.ThrowIfNull(exprBody);
+            
             _clauseReferences.OrderClause.Nodes.Add(new OrderClauseEntryNode()
             {
                 Direction = OrderDirection.Asc,
@@ -51,6 +60,8 @@ namespace Lambdy.Builders.SubBuilders.Expressions
         
         public void AddOrderByDescExpression(System.Linq.Expressions.Expression exprBody)
         {
+            ArgumentNullException.ThrowIfNull(exprBody);
+            
             _clauseReferences.OrderClause.Nodes = new List<OrderClauseEntryNode>()
             {
                 new OrderClauseEntryNode()
@@ -63,6 +74,8 @@ namespace Lambdy.Builders.SubBuilders.Expressions
         
         public void AddThenByDescExpression(System.Linq.Expressions.Expression exprBody)
         {
+            ArgumentNullException.ThrowIfNull(exprBody);
+            
             _clauseReferences.OrderClause.Nodes.Add(new OrderClauseEntryNode()
             {
                 Direction = OrderDirection.Desc,

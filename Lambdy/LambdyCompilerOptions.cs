@@ -2,6 +2,6 @@
 {
     public class LambdyCompilerOptions
     {
-        public bool RemoveEmptyTokens { get; set; }
+        public bool RemoveEmptyTokens { get; set; } = true;
     }
 }

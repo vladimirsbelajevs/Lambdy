@@ -8,6 +8,6 @@ namespace Lambdy
 
         LambdyResult Compile();
 
-        LambdyResult Compile(LambdyCompilerOptions options);
+        LambdyResult Compile(LambdyCompilerOptions? options = null);
     }
 }
