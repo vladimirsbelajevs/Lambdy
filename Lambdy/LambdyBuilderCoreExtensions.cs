@@ -8,7 +8,7 @@ namespace Lambdy
             this ILambdyBuilderCore lambdyBuilder)
             where TTarget : class
         {
-            if (lambdyBuilder is null) throw new ArgumentNullException(nameof(lambdyBuilder));
+            lambdyBuilder.ThrowIfNull(nameof(lambdyBuilder));
             return (ILambdyBuilder<TTarget>) lambdyBuilder;
         }
     }

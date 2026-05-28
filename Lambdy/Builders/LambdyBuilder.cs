@@ -36,7 +36,7 @@ namespace Lambdy.Builders
 
         internal LambdyBuilder(QueryCompiler queryCompiler)
         {
-            _queryCompiler = queryCompiler ?? throw new ArgumentNullException(nameof(queryCompiler));
+            _queryCompiler = queryCompiler.ThrowIfNull(nameof(queryCompiler));
             _clauseSectionNodes[0] = _selectClause;
             _clauseSectionNodes[1] = _fromClause;
             _clauseSectionNodes[2] = _joinClause;
