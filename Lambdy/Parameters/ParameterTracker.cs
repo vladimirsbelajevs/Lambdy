@@ -15,8 +15,8 @@ namespace Lambdy.Parameters
             string key,
             object value)
         {
-            if (key is null) throw new ArgumentNullException(nameof(key));
-            if (value is null) throw new ArgumentNullException(nameof(value));
+            key.ThrowIfNull(nameof(key));
+            value.ThrowIfNull(nameof(value));
 
             if (key.IndexOf(_paramPrefix, StringComparison.Ordinal) < 0)
             {
@@ -28,7 +28,7 @@ namespace Lambdy.Parameters
         
         public string AddParameter(object value)
         {
-            if (value is null) throw new ArgumentNullException(nameof(value));
+            value.ThrowIfNull(nameof(value));
             
             var param = GetNextParameterName();
             Parameters.Add(param, value);

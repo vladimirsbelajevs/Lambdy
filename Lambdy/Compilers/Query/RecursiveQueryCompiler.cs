@@ -11,9 +11,9 @@ namespace Lambdy.Compilers.Query
     {
         public override LambdyResult Compile(QueryCompilerInput queryCompilerInput)
         {
-            if (queryCompilerInput is null) throw new ArgumentNullException(nameof(queryCompilerInput));
-            if (queryCompilerInput.ParameterTracker is null) throw new ArgumentNullException(nameof(queryCompilerInput.ParameterTracker));
-            if (queryCompilerInput.ClauseNodes is null) throw new ArgumentNullException(nameof(queryCompilerInput.ClauseNodes));
+            queryCompilerInput.ThrowIfNull(nameof(queryCompilerInput));
+            queryCompilerInput.ParameterTracker.ThrowIfNull(nameof(queryCompilerInput.ParameterTracker));
+            queryCompilerInput.ClauseNodes.ThrowIfNull(nameof(queryCompilerInput.ClauseNodes));
 
             var stringBuilder = new StringBuilder();
             var expressionNodeSqlVisitor = new RecursiveNodeSqlVisitor(stringBuilder);
